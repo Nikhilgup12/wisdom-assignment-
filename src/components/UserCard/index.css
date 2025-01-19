@@ -1,0 +1,38 @@
+.user-card {
+    text-decoration: none;
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+   
+    color: #333; 
+    /* transition: box-shadow 0.3s ease;
+    padding: 16px;
+    margin: 8px;
+    /* background-color: #f9f9f9; */
+  }
+  
+  .user-card:hover {
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  }
+  
+  .user-card-content {
+    display: flex;
+    flex-direction: column;
+    background-color:aquamarine;
+    padding:20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     border: 1px solid #ccc;
+     border-radius: 8px;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin: 4px 0;
+  }
+  
+  .value {
+    font-weight: normal;
+    color: #555;
+  }
+  

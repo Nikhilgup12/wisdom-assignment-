@@ -1,32 +1,36 @@
 import { Component } from "react";
-import Loader from "react-loader-spinner"
-import UserCard from "../UserCard"
+import Loader from "react-loader-spinner";
+import UserCard from "../UserCard";
+import "./index.css";
 
 const apiStatusConstrant = {
-    initial: 'INITIAL',
-    success: 'SUCCESS',
-    failure: 'FAILURE',
-    loading: 'LOADING',
-}
+  initial: "INITIAL",
+  success: "SUCCESS",
+  failure: "FAILURE",
+  loading: "LOADING",
+};
 
 class Home extends Component {
-  state = { userList: [],apiStatus: apiStatusConstrant.initial };
+  state = {
+    userList: [],
+    searchInput: "",
+    sortOrder: "default", // Sort order state
+    apiStatus: apiStatusConstrant.initial,
+  };
 
   componentDidMount() {
     this.getUserList();
   }
-  
-
 
   getUserList = async () => {
-    this.setState({apiStatus: apiStatusConstrant.loading})
+    this.setState({ apiStatus: apiStatusConstrant.loading });
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     if (response.ok) {
       const data = await response.json();
       const updatedData = data.map((each) => ({
         id: each.id,
         name: each.name,
-        email: each.email, // Corrected the spelling here
+        email: each.email,
         address: {
           street: each.address.street,
           suite: each.address.suite,
@@ -34,7 +38,7 @@ class Home extends Component {
           zipcode: each.address.zipcode,
           geo: {
             lat: each.address.geo.lat,
-            lng: each.address.geo.lng, // Fixed typo from 'ing' to 'lng'
+            lng: each.address.geo.lng,
           },
         },
         phone: each.phone,
@@ -45,75 +49,125 @@ class Home extends Component {
           bs: each.company.bs,
         },
       }));
-      this.setState({ userList: updatedData,apiStatus: apiStatusConstrant.success });
-    }
-    else{
-        this.setState({apiStatus: apiStatusConstrant.failure})
+      this.setState({
+        userList: updatedData,
+        apiStatus: apiStatusConstrant.success,
+      });
+    } else {
+      this.setState({ apiStatus: apiStatusConstrant.failure });
     }
   };
-  onClickRetry = () => {
-    this.getUserList()
-  }
 
-  renderSuccessView =()=>{
-    const {userList}= this.state
+  onClickRetry = () => {
+    this.getUserList();
+  };
+
+  onSearchInput = (event) => {
+    this.setState({ searchInput: event.target.value });
+  };
+
+  onSortChange = (event) => {
+    this.setState({ sortOrder: event.target.value });
+  };
+
+  getFilteredAndSortedUsers = () => {
+    const { searchInput, userList, sortOrder } = this.state;
+
+    let filteredUsers = userList.filter((each) =>
+      each.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    if (sortOrder === "asc") {
+      filteredUsers.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOrder === "desc") {
+      filteredUsers.sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    return filteredUsers;
+  };
+
+  renderSuccessView = () => {
+    const { searchInput, sortOrder } = this.state;
+    const filteredUsers = this.getFilteredAndSortedUsers();
+
     return (
-        <div>
-        <h1>Home Nikhil</h1>
-        <ul>
-          {userList.map((each) => (
-            <UserCard key={each.id} user={each} />
-          ))}
-        </ul>
+      <div className="home-success-view">
+        <div className="filters-container">
+          <input
+            type="search"
+            placeholder="Search by name"
+            onChange={this.onSearchInput}
+            value={searchInput}
+            className="search-input"
+          />
+          <select
+            onChange={this.onSortChange}
+            value={sortOrder}
+            className="sort-dropdown"
+          >
+            <option value="default">Sort by</option>
+            <option value="asc">Name (A-Z)</option>
+            <option value="desc">Name (Z-A)</option>
+          </select>
+        </div>
+        {filteredUsers.length === 0 ? (
+          <div className="no-users-container">
+            <h1 className="no-users-text">No Users Found</h1>
+          </div>
+        ) : (
+          <ul className="user-list">
+            {filteredUsers.map((each) => (
+              <UserCard key={each.id} user={each} />
+            ))}
+          </ul>
+        )}
       </div>
-    )
-  }
+    );
+  };
+
   renderFailureView = () => (
-    <div className="products-error-view-container">
+    <div className="error-view-container">
       <img
         src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-        className="products-failure-img"
+        className="failure-img"
         alt="failure view"
       />
-      <h1 className="product-failure-heading-text">
-        Oops! Something Went Wrong
-      </h1>
-      <p className="products-failure-description">
+      <h1 className="failure-heading">Oops! Something Went Wrong</h1>
+      <p className="failure-description">
         We cannot seem to find the page you are looking for.
       </p>
-      <button className="failure-btn" onClick={this.onClickRetry} type="button">
+      <button
+        className="retry-btn"
+        onClick={this.onClickRetry}
+        type="button"
+      >
         Retry
       </button>
     </div>
-  )
+  );
 
   renderLoadingView = () => (
-    <div className="products-loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#000000" height="50" width="50" />
+    <div className="loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
-  )
+  );
 
   apiStatusCheck = () => {
-    const {apiStatus} = this.state
+    const { apiStatus } = this.state;
     switch (apiStatus) {
       case apiStatusConstrant.success:
-        return this.renderSuccessView()
+        return this.renderSuccessView();
       case apiStatusConstrant.failure:
-        return this.renderFailureView()
+        return this.renderFailureView();
       case apiStatusConstrant.loading:
-        return this.renderLoadingView()
+        return this.renderLoadingView();
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   render() {
-    return (
-        <>
-        <h1> Nikhil </h1>
-        {this.apiStatusCheck()}
-        </>
-    )
+    return <div className="home-container">{this.apiStatusCheck()}</div>;
   }
 }
 

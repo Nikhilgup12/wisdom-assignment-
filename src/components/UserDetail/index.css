@@ -1,0 +1,113 @@
+/* UserDetail.css */
+
+.user-detail-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .user-detail-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .user-detail-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .user-detail-card {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .user-detail-item {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .user-detail-item strong {
+    color: #333;
+  }
+  
+  .user-detail-item a {
+    color: #0b69ff;
+    text-decoration: none;
+  }
+  
+  .user-detail-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .go-back-link {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .go-back-btn {
+    background-color: #0b69ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .go-back-btn:hover {
+    background-color: #084cbd;
+  }
+  
+  /* Failure View Styles */
+  .error-view-container {
+    text-align: center;
+  }
+  
+  .failure-img {
+    width: 150px;
+    margin-bottom: 16px;
+  }
+  
+  .failure-heading {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .failure-description {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .retry-btn {
+    background-color: #0b69ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .retry-btn:hover {
+    background-color: #084cbd;
+  }
+  
+  /* Loader Styles */
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  }
+  
