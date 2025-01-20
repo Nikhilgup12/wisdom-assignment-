@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# User Details Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**A React.js-based web application that displays a list of users fetched from an API. Users can click on any user to view detailed information.** The app is deployed on Vercel and can be accessed at [User Details App](https://wisdom-assignment.vercel.app/).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Project Features
 
-### `npm start`
+- **User Listing:** Displays a list of users fetched from a REST API.
+- **User Details:** Clicking on a user navigates to a detailed view of the selected user.
+- **API Status Handling:** Handles different states (loading, success, failure) during API calls with proper UI feedback.
+- **Routing:** Implements client-side routing using `react-router-dom`.
+- **Reusable Components:** Built using reusable components like `UserCard`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **Frontend:** React.js, CSS
+- **Routing:** react-router-dom
+- **Deployment:** Vercel
+- **Third-party Libraries:** react-loader-spinner
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```plaintext
+src/
+├── components/
+│   ├── UserCard/
+│   │   ├── index.js
+│   │   ├── index.css
+│   ├── UserDetail/
+│   │   ├── index.js
+│   │   ├── index.css
+│
+├── App.js
+├── index.js
+├── index.css
+Steps to Run the Project Locally
+Follow these steps to set up and run the project on your local machine:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone the Repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+git clone <repository-link>
+cd <repository-folder>
+Install Dependencies Ensure Node.js is installed, then install the required dependencies:
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install
+Start the Development Server Run the app in development mode:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm start
+The app will be available at http://localhost:3000/ in your browser.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+APIs Used
+User List API
 
-## Learn More
+Endpoint: https://jsonplaceholder.typicode.com/users
+Description: Fetches a list of users.
+Method: GET
+User Detail API
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Endpoint: https://jsonplaceholder.typicode.com/users/:id
+Description: Fetches detailed information for a specific user.
+Method: GET
+Features Implemented
+User Listing Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Displays a list of users using the API.
+Users are shown in cards with their name, email, and city.
+Each card is clickable, navigating to the respective user's detail page.
+User Detail Page
 
-### Code Splitting
+Displays detailed information about the selected user, including:
+Name
+Email
+Phone
+Company Name
+Website (with a clickable link)
+Includes a "Go Back" button to return to the user listing page.
+Loading and Error States
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Loading: A spinner is displayed while API calls are in progress.
+Error: Displays an error message with a "Retry" button if the API call fails.
+Deployment
+The application is deployed on Vercel and can be accessed here: User Details App.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Future Enhancements
+Add user search functionality.
+Implement sorting and filtering options for the user list.
+Add unit and integration tests using Jest and React Testing Library.
